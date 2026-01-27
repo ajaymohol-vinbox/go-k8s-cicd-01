@@ -19,16 +19,6 @@ pipeline {
             }
         }
 
-        stage('Build Go App') {
-            steps {
-                sh '''
-                  echo "Building Go application..."
-                  go mod download
-                  go build -o app
-                '''
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh '''
