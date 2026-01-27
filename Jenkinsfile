@@ -43,15 +43,16 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                  echo "Deploying to Kubernetes..."
-                  kubectl apply -f k8s/
-                  kubectl rollout restart deployment go-app
-                  kubectl rollout status deployment go-app
-                '''
-            }
-        }
+    steps {
+        sh '''
+          echo "Deploying to Kubernetes..."
+          kubectl apply -f k8s/
+          kubectl rollout restart deployment/go-app
+          kubectl rollout status deployment/go-app --timeout=120s
+        '''
+    }
+}
+
     }
 
     post {
